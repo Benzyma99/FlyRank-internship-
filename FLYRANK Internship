@@ -1,79 +1,122 @@
-"""
-Simple Task API
+# FlyRank Backend Internship - Task API
 
-Run: python "FLYRANK Internship"
+## 📌 Project Overview
 
-This file implements a lightweight REST API for managing tasks using Flask.
-Endpoints:
- - GET /tasks
- - GET /tasks/<id>
- - POST /tasks
- - PUT /tasks/<id>
- - DELETE /tasks/<id>
+This project is a simple Task Management CRUD API built using **Python** and **FastAPI** as part of the FlyRank Backend Internship assignment.
 
-Data is stored in-memory for simplicity.
-"""
-from flask import Flask, jsonify, request, abort
-from uuid import uuid4
+The API allows users to create, read, update, and delete tasks using RESTful endpoints.
 
-app = Flask(__name__)
+---
 
-tasks = {}
+## 🚀 Features
 
-def make_task(title, description=""):
-    tid = str(uuid4())
-    return {
-        "id": tid,
-        "title": title,
-        "description": description,
-        "completed": False
-    }
+- View all tasks
+- View a single task by ID
+- Create a new task
+- Update an existing task
+- Delete a task
 
-@app.route("/tasks", methods=["GET"])
-def list_tasks():
-    return jsonify(list(tasks.values()))
+---
 
-@app.route("/tasks/<task_id>", methods=["GET"])
-def get_task(task_id):
-    t = tasks.get(task_id)
-    if not t:
-        abort(404)
-    return jsonify(t)
+## 🛠 Technologies Used
 
-@app.route("/tasks", methods=["POST"])
-def create_task():
-    data = request.get_json(force=True)
-    title = data.get("title")
-    if not title:
-        return jsonify({"error": "title is required"}), 400
-    description = data.get("description", "")
-    t = make_task(title, description)
-    tasks[t["id"]] = t
-    return jsonify(t), 201
+- Python 3
+- FastAPI
+- Uvicorn
+- Git
+- GitHub
 
-@app.route("/tasks/<task_id>", methods=["PUT"])
-def update_task(task_id):
-    t = tasks.get(task_id)
-    if not t:
-        abort(404)
-    data = request.get_json(force=True)
-    if "title" in data:
-        t["title"] = data["title"]
-    if "description" in data:
-        t["description"] = data["description"]
-    if "completed" in data:
-        t["completed"] = bool(data["completed"])
-    return jsonify(t)
+---
 
-@app.route("/tasks/<task_id>", methods=["DELETE"])
-def delete_task(task_id):
-    if task_id not in tasks:
-        abort(404)
-    del tasks[task_id]
-    return "", 204
+## 📁 Project Structure
 
-if __name__ == "__main__":
-    # add a sample task
-    sample = make_task("Sample task", "This is an example task")
-    tasks[sample["id"]] = sample
-    app.run(host="0.0.0.0", port=5000, debug=True)
+```
+.
+├── main.py
+├── requirements.txt
+├── README.md
+└── venv/
+```
+
+---
+
+## ⚙ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Benzyma99/FlyRank-internship-.git
+```
+
+### 2. Open the project folder
+
+```bash
+cd FlyRank-internship-
+```
+
+### 3. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### 4. Activate the virtual environment
+
+Windows:
+
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+### 5. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ▶ Running the API
+
+Start the server using:
+
+```bash
+uvicorn main:app --reload
+```
+
+The API will run at:
+
+```
+http://127.0.0.1:8000
+```
+
+Swagger documentation is available at:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | / | Welcome message |
+| GET | /tasks | Retrieve all tasks |
+| GET | /tasks/{task_id} | Retrieve a task by ID |
+| POST | /tasks | Create a new task |
+| PUT | /tasks/{task_id} | Update a task |
+| DELETE | /tasks/{task_id} | Delete a task |
+
+---
+
+## 🧪 Testing
+
+All endpoints were tested successfully using the built-in Swagger UI provided by FastAPI.
+
+---
+
+## 👨‍💻 Author
+
+**GitHub:** https://github.com/Benzyma99
