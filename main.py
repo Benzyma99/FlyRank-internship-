@@ -71,3 +71,50 @@ def delete_task(task_id: int):
                 "message": "Task deleted successfully!"
             }
     return {"message": "Task not found!"}
+    import sqlite3
+    import database
+    @app.get("/tasks")
+def get_tasks():
+    connection = sqlite3.connect("tasks.db")
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
+
+    connection.close()
+
+    return tasks
+    @app.get("/tasks")
+def get_tasks():
+    connection = sqlite3.connect("tasks.db")
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
+
+    connection.close()
+
+    return tasks
+    
+    @app.get("/tasks")
+def get_tasks():
+    connection = sqlite3.connect("tasks.db")
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
+
+    connection.close()
+
+    return tasks
+    @app.delete("/tasks/{task_id}")
+def delete_task(task_id: int):
+    connection = sqlite3.connect("tasks.db")
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+
+    connection.commit()
+    connection.close()
+
+    return {"message": "Task deleted successfully!"}
