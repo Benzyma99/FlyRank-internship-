@@ -1,15 +1,12 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-
-DATABASE_URL = "sqlite:///./tasks.db"
-
+DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5433/tasks_db"
 
 engine = create_engine(
     DATABASE_URL,
-    connect_args={"check_same_thread": False},
+    pool_pre_ping=True,
 )
-
 
 SessionLocal = sessionmaker(
     autocommit=False,
@@ -17,9 +14,7 @@ SessionLocal = sessionmaker(
     bind=engine,
 )
 
-
-class Base(DeclarativeBase):
-    pass
+Base = declarative_base()
 
 
 def get_db():
