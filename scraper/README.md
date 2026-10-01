@@ -58,3 +58,22 @@ Install the dependencies:
 
 ```powershell
 python -m pip install requests beautifulsoup4 pydantic
+
+## Submission Verification
+
+Before submission, the scraper was verified to:
+
+- process exactly 3 catalogue pages
+- discover 60 unique book URLs
+- extract 60 book detail pages
+- produce 60 valid records
+- produce 0 invalid records during the successful run
+- isolate failed pages
+- avoid retrying 403 and 404 responses
+- retry once for timeout/5xx failures
+- cache downloaded HTML
+- keep cache files out of Git
+- produce a run report
+- use a descriptive User-Agent
+- maintain a request delay for real requests
+- produce repeatable output on reruns
