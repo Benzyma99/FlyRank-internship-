@@ -3,20 +3,26 @@
 ## Target Classification
 
 ### Target
+
 [Books to Scrape](https://books.toscrape.com/)
 
 ### Why this site?
+
 Books to Scrape is a public practice sandbox designed for learning and practicing web scraping.
 
 ### Scope
-This scraper will process only the first three catalogue pages and discover the books listed on those pages.
 
-The expected scope is:
+This scraper processes only the first three catalogue pages.
+
+Expected scope:
+
 - 3 catalogue pages
 - 60 unique book pages
 
 ### Data collected
-For each book, the scraper will collect:
+
+For each book, the scraper collects:
+
 - title
 - product URL
 - price text
@@ -26,14 +32,29 @@ For each book, the scraper will collect:
 - source catalogue page
 - fetch timestamp
 
-A normalized numeric `price_gbp` value will also be produced later in the pipeline.
+The pipeline also normalizes the price into:
 
-### Robots.txt check
-The requested `https://books.toscrape.com/robots.txt` returned `404 Not Found`.
+- `price_gbp`
+
+## Robots.txt Check
+
+The requested:
+
+`https://books.toscrape.com/robots.txt`
+
+returned `404 Not Found`.
 
 Therefore, no robots file was found. A missing robots file is not treated as permission to scrape.
 
-### Why this is appropriate
-Books to Scrape is specifically provided as a practice sandbox, making it an appropriate target for this learning assignment.
+Books to Scrape is specifically provided as a practice sandbox for scraping exercises.
 
 I will not reuse this code on another site without checking its rules and terms first.
+
+## Installation
+
+Python 3.10+ is required.
+
+Install the dependencies:
+
+```powershell
+python -m pip install requests beautifulsoup4 pydantic
